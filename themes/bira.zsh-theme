@@ -7,6 +7,7 @@ local conda_prompt='$(conda_prompt_info)'
 local vcs_branch='$(git_prompt_info)$(hg_prompt_info)'
 local rvm_ruby='$(ruby_prompt_info)'
 local venv_prompt='$(virtualenv_prompt_info)'
+
 if [[ "${plugins[@]}" =~ 'kube-ps1' ]]; then
     local kube_prompt='$(kube_ps1)'
 else
@@ -15,7 +16,7 @@ fi
 
 ZSH_THEME_RVM_PROMPT_OPTIONS="i v g"
 
-PROMPT="╭─${conda_prompt}${user_host}${current_dir}${rvm_ruby}${vcs_branch}${venv_prompt}${kube_prompt}
+PROMPT="╭─${conda_prompt}${venv_prompt}${user_host}${current_dir}${rvm_ruby}${vcs_branch}${kube_prompt}
 ╰─%B${user_symbol}%b "
 RPROMPT="%B${return_code}%b"
 
@@ -32,7 +33,25 @@ ZSH_THEME_HG_PROMPT_CLEAN="$ZSH_THEME_GIT_PROMPT_CLEAN"
 ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}‹"
 ZSH_THEME_RUBY_PROMPT_SUFFIX="› %{$reset_color%}"
 
-ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg[green]%}‹"
-ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="› %{$reset_color%}"
-ZSH_THEME_VIRTUALENV_PREFIX="$ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX"
-ZSH_THEME_VIRTUALENV_SUFFIX="$ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX"
+ZSH_THEME_CONDA_PREFIX="%{$fg[$ZSH_THEME_CONDA_PROMPT_COLOR]%}${ZSH_THEME_CONDA_PROMPT_PREFIX=(}"
+ZSH_THEME_CONDA_SUFFIX="${ZSH_THEME_CONDA_PROMPT_SUFFIX=)} %{$reset_color%}"
+
+ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[$ZSH_THEME_VIRTUALENV_PROMPT_COLOR]%}${ZSH_THEME_VIRTUALENV_PROMPT_PREFIX=(}"
+ZSH_THEME_VIRTUALENV_SUFFIX="${ZSH_THEME_VIRTUALENV_PROMPT_SUFFIX=)} %{$reset_color%}"
+
+# Recommended settings for Oh-My-Zsh in ~/.zshrc
+# export ZSH="$HOME/.oh-my-zsh"
+
+# ZSH_THEME="Bira"
+
+# ZSH_THEME_CONDA_PROMPT_COLOR="cyan"
+# ZSH_THEME_CONDA_PROMPT_PREFIX="("
+# ZSH_THEME_CONDA_PROMPT_SUFFIX=")"
+
+# ZSH_THEME_VIRTUALENV_PROMPT_COLOR="cyan"
+# ZSH_THEME_VIRTUALENV_PROMPT_PREFIX="("
+# ZSH_THEME_VIRTUALENV_PROMPT_SUFFIX=")"
+
+# plugins=(git zsh-autosuggestions zsh-syntax-highlighting conda-env virtualenv)
+
+# source $ZSH/oh-my-zsh.sh
